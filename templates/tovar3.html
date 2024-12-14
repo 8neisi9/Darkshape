@@ -83,18 +83,14 @@
 
 <script>
     function changeImage(imageName) {
-        // Получаем элемент изображения
         const imageElement = document.getElementById('product-image');
-        // Меняем src изображения
         imageElement.src = "{{ url_for('static', filename='img/') }}" + imageName;
     }
 
     function buyProduct() {
         {% if current_user.is_authenticated %}
-            // Если пользователь авторизован, перенаправляем на страницу /buy
             window.location.href = "{{ url_for('buy') }}";
         {% else %}
-            // Если пользователь не авторизован, показываем всплывающее окно
             alert("Для покупки необходимо авторизоваться!");
         {% endif %}
     }

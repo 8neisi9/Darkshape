@@ -11,7 +11,6 @@
             <div class="image-container">
                 <img id="product-image" src="{{ url_for('static', filename='img/' + images[0]) }}" alt="Товар" class="img-fluid rounded" style="width: 500px; height: 500px;">
             </div>
-            <!-- добавить фото -->
             <div class="mt-4">
                 {% for image in images %}
                     <button onclick="changeImage('{{ image }}')" class="btn btn-outline-primary me-2">Фото {{ loop.index }}</button>
@@ -46,8 +45,8 @@
             <div class="mt-5">
                 <h4>Добавить отзыв</h4>
                 <form action="{{ url_for('add_comment') }}" method="POST">
-                    <input type="hidden" name="product_id" value="1">  <!-- Укажите ID товара -->
-                    <input type="hidden" name="next" value="{{ request.url }}">  <!-- Передаем текущий URL -->
+                    <input type="hidden" name="product_id" value="1">
+                    <input type="hidden" name="next" value="{{ request.url }}">
                     <div class="mb-3">
                         <textarea name="comment" class="form-control" rows="3" placeholder="Введите ваш комментарий"></textarea>
                     </div>
@@ -59,8 +58,8 @@
             <div class="mt-5">
                 <h4>Оцените товар</h4>
                 <form action="{{ url_for('add_rating') }}" method="POST">
-                    <input type="hidden" name="product_id" value="1">  <!-- Укажите ID товара -->
-                    <input type="hidden" name="next" value="{{ request.url }}">  <!-- Передаем текущий URL -->
+                    <input type="hidden" name="product_id" value="1">
+                    <input type="hidden" name="next" value="{{ request.url }}">
                     <div class="mb-3">
                         <label for="rating" class="form-label">Оценка (от 1 до 5)</label>
                         <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" required>
@@ -94,18 +93,14 @@
 
 <script>
     function changeImage(imageName) {
-        // Получаем элемент изображения
         const imageElement = document.getElementById('product-image');
-        // Меняем src изображения
         imageElement.src = "{{ url_for('static', filename='img/') }}" + imageName;
     }
 
     function buyProduct() {
         {% if current_user.is_authenticated %}
-            // Если пользователь авторизован, перенаправляем на страницу /buy
             window.location.href = "{{ url_for('buy') }}";
         {% else %}
-            // Если пользователь не авторизован, показываем всплывающее окно
             alert("Для покупки необходимо авторизоваться!");
         {% endif %}
     }

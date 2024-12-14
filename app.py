@@ -186,7 +186,7 @@ def add_rating():
     if not rating_value:
         flash('Оценка не может быть пустой!', 'danger')
     else:
-        # Создаем новую оценку
+        # новая оценка
         new_rating = Rating(
             value=int(rating_value),
             user_id=current_user.id,
@@ -225,5 +225,5 @@ def payment():
     return render_template('payment.html')
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Создаем таблицы в базе данных
+        db.create_all()
     app.run(debug=True, port=5001)
